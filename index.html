@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Meet & Greet Registration</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #111; color: #333; padding: 15px; display: flex; justify-content: center; }
+        .container { max-width: 650px; width: 100%; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        
+        /* Header styling matching the image */
+        .header { background: #0a192f; color: #fff; text-align: center; padding: 25px 15px; position: relative; border-bottom: 4px solid #c5a059; }
+        .header h3 { font-size: 14px; letter-spacing: 2px; color: #c5a059; text-transform: uppercase; margin-bottom: 5px; }
+        .header h1 { font-size: 26px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .header h2 { font-size: 16px; font-weight: 300; color: #ddd; }
+        
+        .page { padding: 20px; display: none; }
+        .page.active { display: block; }
+        
+        .section-title { background: #f0f0f0; padding: 8px 12px; font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #0a192f; margin-bottom: 15px; margin-top: 10px; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; color: #444; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        
+        /* Package Selection Options */
+        .package-option { border: 1px solid #ddd; padding: 10px; margin-bottom: 8px; border-radius: 4px; display: flex; align-items: center; cursor: pointer; }
+        .package-option input { margin-right: 10px; }
+        
+        .btn-container { display: flex; justify-content: space-between; margin-top: 20px; }
+        .btn { background: #0a192f; color: #fff; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase; width: 100%; }
+        .btn-secondary { background: #666; width: 48%; }
+        .btn-next { width: 48%; }
+        
+        /* Ticket / Summary Box */
+        .ticket-preview { border: 2px dashed #0a192f; background: #fafafa; padding: 15px; border-radius: 6px; margin-top: 15px; text-align: center; }
+        .ticket-id-box { border: 2px solid #333; padding: 10px; margin: 10px auto; width: 80%; background: #fff; font-weight: bold; font-size: 16px; letter-spacing: 2px; }
+        
+        .rules-list { font-size: 12px; color: #555; padding-left: 18px; margin-bottom: 15px; }
+        .rules-list li { margin-bottom: 5px; }
+
+        /* Footer Info */
+        .footer-info { background: #f9f9f9; padding: 15px; font-size: 11px; border-top: 1px solid #eee; margin-top: 20px; text-align: center; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <h3>AQV Anthony Q. Warr</h3>
+        <h1>Official Meet & Greet</h1>
+        <h2>Registration Form with <strong>Charlie Hunnam</strong></h2>
+    </div>
+
+    <!-- FORM START -->
+    <form id="meetGreetForm" onsubmit="event.preventDefault();">
+        
+        <!-- PAGE 1: FAN & PACKAGE INFO -->
+        <div class="page active" id="page1">
+            <div class="section-title">1. Fan Information</div>
+            
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="phone" placeholder="+1 (000) 000-0000" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Country / City</label>
+                <input type="text" id="location" placeholder="e.g. New York, USA" required>
+            </div>
+
+            <div class="section-title">2. Select Package Details</div>
+            
+            <label class="package-option">
+                <input type="radio" name="package" value="General Admission Meet & Greet - $150" checked>
+                General Admission Meet & Greet
+            </label>
+            <label class="package-option">
+                <input type="radio" name="package" value="VIP Meet & Greet (Photo & Autograph) - $300">
+                VIP Meet & Greet (Photo & Autograph)
+            </label>
+            <label class="package-option">
+                <input type="radio" name="package" value="Premium Meet & Greet (Photo, Autograph & Gift) - $500">
+                Premium Meet & Greet (Photo, Autograph & Gift)
+            </label>
+            <label class="package-option">
+                <input type="radio" name="package" value="Exclusive Private Session - $1,000">
+                Exclusive Private Session
+            </label>
+
+            <button type="button" class="btn" style="margin-top:15px;" onclick="nextPage(2)">Continue to Event & Payment Details →</button>
+        </div>
+
+        <!-- PAGE 2: EVENT DETAILS & PAYMENT UPLOAD -->
+        <div class="page" id="page2">
+            <div class="section-title">Event & Ticket Details</div>
+            
+            <div style="font-size: 13px; line-height: 1.6; margin-bottom: 15px; background: #fdf8ec; padding: 10px; border-left: 3px solid #c5a059;">
+                <strong>📅 Date:</strong> To Be Announced<br>
+                <strong>⏰ Time:</strong> 5:00 PM EST<br>
+                <strong>📍 Venue:</strong> Exclusive VIP Hall / Private Venue
+            </div>
+
+            <div class="section-title">3. Upload Payment Receipt</div>
+            <p style="font-size: 12px; color: #555; margin-bottom: 10px;">
+                Please make your transfer/payment using your assigned method, then upload a screenshot or picture of your payment receipt below.
+            </p>
+
+            <div class="form-group">
+                <label>Payment Proof / Receipt Screenshot</label>
+                <input type="file" id="receiptUpload" accept="image/*" required>
+            </div>
+
+            <div class="section-title">Important Information</div>
+            <ul class="rules-list">
+                <li>Please arrive at least 30 minutes before the scheduled time.</li>
+                <li>This registration is non-transferable and valid for one person only.</li>
+                <li>No refunds or exchanges once payment is submitted.</li>
+                <li>Follow all event staff instructions.</li>
+                <li>Bring a valid photo ID along with this registration pass.</li>
+            </ul>
+
+            <div class="btn-container">
+                <button type="button" class="btn btn-secondary" onclick="nextPage(1)">← Back</button>
+                <button type="button" class="btn btn-next" onclick="submitForm()">Submit Payment →</button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: PENDING & TICKET DISPLAY -->
+        <div class="page" id="page3">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="font-size: 40px;">⏳</span>
+                <h2 style="color: #c5a059;">Registration Pending Review</h2>
+                <p style="font-size: 13px; color: #666; margin-top: 5px;">Your payment receipt has been submitted and is currently being reviewed by the event organizers.</p>
+            </div>
+
+            <!-- TICKET CARD PREVIEW -->
+            <div class="ticket-preview">
+                <h3 style="font-size: 14px; color: #888;">TICKET / REGISTRATION ID</h3>
+                <div class="ticket-id-box">
+                    <span id="ticketStatus" style="color: #d9534f;">PENDING APPROVAL</span>
+                </div>
+                <p style="font-size: 11px; color: #888;">(Barcode & Ticket ID will be assigned after admin approval)</p>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ddd;">
+                
+                <div style="text-align: left; font-size: 13px; line-height: 1.8;">
+                    <strong>Name:</strong> <span id="summaryName">-</span><br>
+                    <strong>Email:</strong> <span id="summaryEmail">-</span><br>
+                    <strong>Package:</strong> <span id="summaryPackage">-</span><br>
+                    <strong>Organizer:</strong> Charlie Hunnam Global
+                </div>
+            </div>
+
+            <div class="footer-info">
+                Organized by Charlie Hunnam Global<br>
+                📧 marcoc11611@gmail.com | 🌐 www.charliehunnam.com<br>
+                <strong>Thank you! We look forward to meeting you.</strong>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    function nextPage(pageNum) {
+        // Validate inputs before moving
+        if (pageNum === 2) {
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            if (!name || !email) {
+                alert('Please fill in your Name and Email address first.');
+                return;
+            }
+        }
+        
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById('page' + pageNum).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function submitForm() {
+        const fileInput = document.getElementById('receiptUpload');
+        if (!fileInput.files.length) {
+            alert('Please upload a screenshot of your payment receipt before submitting.');
+            return;
+        }
+
+        // Fill Summary Data
+        document.getElementById('summaryName').innerText = document.getElementById('fullName').value;
+        document.getElementById('summaryEmail').innerText = document.getElementById('email').value;
+        
+        const selectedPackage = document.querySelector('input[name="package"]:checked').value;
+        document.getElementById('summaryPackage').innerText = selectedPackage;
+
+        // Move to Confirmation Page
+        nextPage(3);
+    }
+</script>
+
+</body>
+  </html>
+  
