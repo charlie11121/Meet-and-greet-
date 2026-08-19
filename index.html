@@ -220,9 +220,10 @@
             const name = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
+            const zipcode = document.getElementById('zipcode').value;
             
             if (!name || !email || !phone) {
-                alert('Please complete your Full Name, Email, and Phone Number before continuing.');
+                alert('Please complete your Full Name, Email, and Phone Numbe, Zip Code, before continuing.');
                 return;
             }
 
@@ -230,6 +231,7 @@
             document.getElementById('summaryName').innerText = name;
             document.getElementById('summaryEmail').innerText = email;
             document.getElementById('summaryPackage').innerText = selectedPackageValue;
+            document.getElementById('summaryzipcode').innerText = zipcode;
             document.getElementById('summaryInclusions').innerText = selectedInclusions;
             document.getElementById('payBtnLink').href = selectedPaymentLink;
         }
