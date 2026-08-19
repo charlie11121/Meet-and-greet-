@@ -67,9 +67,6 @@
     <!-- FORMSPREE CONNECTED FORM -->
     <form id="meetGreetForm" action="https://form.jotform.com/262299221978066" method="POST" enctype="multipart/form-data">
         
-        
-        
-        
         <!-- PAGE 1: FAN & PACKAGE SELECTION -->
         <div class="page active" id="page1">
             <div class="section-title">1. Fan Information</div>
@@ -97,25 +94,25 @@
             <div class="section-title">2. Select Package Category</div>
             
             <div class="packages-grid">
-                <div class="package-card selected" onclick="selectPkg(this, 'Platinum Pass (€800 / $800)')">
+                <div class="package-card selected" onclick="selectPkg(this, 'Platinum Pass (€800 / $800)', 'https://your-platinum-payment-link.com', 'Front Row Seating, 1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction')">
                     <input type="radio" name="Package_Selected" value="Platinum Pass (€800 / $800)" checked>
                     <div class="package-name">Platinum</div>
                     <div class="package-price">€800</div>
                 </div>
                 
-                <div class="package-card" onclick="selectPkg(this, 'Gold Pass (€600 / $600)')">
+                <div class="package-card" onclick="selectPkg(this, 'Gold Pass (€600 / $600)', 'https://your-gold-payment-link.com', 'Priority Seating, Group Photo Opportunity, Autograph, VIP Laminate & Lanyard, Exclusive Merchandise')">
                     <input type="radio" name="Package_Selected" value="Gold Pass (€600 / $600)">
                     <div class="package-name">Gold</div>
                     <div class="package-price">€600</div>
                 </div>
 
-                <div class="package-card" onclick="selectPkg(this, 'Silver Pass (€400 / $400)')">
+                <div class="package-card" onclick="selectPkg(this, 'Silver Pass (€400 / $400)', 'https://your-silver-payment-link.com', 'Standard Seating, Group Photo Opportunity, Signed Event Card, VIP Lanyard')">
                     <input type="radio" name="Package_Selected" value="Silver Pass (€400 / $400)">
                     <div class="package-name">Silver</div>
                     <div class="package-price">€400</div>
                 </div>
 
-                <div class="package-card" onclick="selectPkg(this, 'Bronze Pass (€200 / $200)')">
+                <div class="package-card" onclick="selectPkg(this, 'Bronze Pass (€200 / $200)', 'https://your-bronze-payment-link.com', 'General Admission Seating, Event Souvenir Card, Group Fan Interaction')">
                     <input type="radio" name="Package_Selected" value="Bronze Pass (€200 / $200)">
                     <div class="package-name">Bronze</div>
                     <div class="package-price">€200</div>
@@ -133,7 +130,7 @@
                 📅 <strong>Date:</strong> 5 October 2026 (Monday)<br>
                 📍 <strong>Venue:</strong> Volkswagen Arena, İstanbul, Türkiye<br>
                 ⏰ <strong>Timing:</strong> Doors Open: 15:00 | Event Starts: 17:00<br>
-                🎁 <strong>Inclusions:</strong> Photo Opportunity, Autograph, VIP Laminate & Group Interaction
+                🎁 <strong>Inclusions:</strong> <span id="summaryInclusions">1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction</span>
             </div>
 
             <div class="section-title">3. Make Payment</div>
@@ -141,10 +138,8 @@
                 Tap the gold button below to open the secure payment link and complete your pass transfer:
             </p>
 
-            <!-- ======================================================== -->
-            <!-- PASTE YOUR PAYMENT LINK INSIDE THE href="" ATTRIBUTE BELOW -->
-            <!-- ======================================================== -->
-            <a href="https://your-payment-link-here.com" target="_blank" class="pay-link-btn">
+            <!-- DYNAMIC PAYMENT BUTTON -->
+            <a id="payBtnLink" href="https://your-platinum-payment-link.com" target="_blank" class="pay-link-btn">
                 💳 Tap Here to Complete Payment
             </a>
 
@@ -196,14 +191,19 @@
 
 <script>
     let selectedPackageValue = "Platinum Pass (€800 / $800)";
+    let selectedPaymentLink = "https://your-platinum-payment-link.com";
+    let selectedInclusions = "Front Row Seating, 1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction";
 
-    function selectPkg(cardElement, pkgValue) {
+    function selectPkg(cardElement, pkgValue, payLink, inclusions) {
         document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
         cardElement.classList.add('selected');
         
         const radio = cardElement.querySelector('input[type="radio"]');
         radio.checked = true;
+        
         selectedPackageValue = pkgValue;
+        selectedPaymentLink = payLink;
+        selectedInclusions = inclusions;
     }
 
     function nextPage(pageNum) {
@@ -217,10 +217,12 @@
                 return;
             }
 
-            // Update Page 2 Preview Data
+            // Update Page 2 Preview Data, Payment Link, and Package Inclusions
             document.getElementById('summaryName').innerText = name;
             document.getElementById('summaryEmail').innerText = email;
             document.getElementById('summaryPackage').innerText = selectedPackageValue;
+            document.getElementById('summaryInclusions').innerText = selectedInclusions;
+            document.getElementById('payBtnLink').href = selectedPaymentLink;
         }
         
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
@@ -230,4 +232,5 @@
 </script>
 
 </body>
-</html>
+    </html>
+    
