@@ -76,7 +76,7 @@
     </div>
 
     <!-- FORMSPREE CONNECTED FORM -->
-    
+    <form id="meetGreetForm" action="https://form.jotform.com/262299221978066" method="POST" enctype="multipart/form-data" onsubmit="submitForm(event)">
         
         <!-- PAGE 1: FAN & PACKAGE SELECTION -->
         <div class="page active" id="page1">
@@ -172,6 +172,7 @@
                 <!-- REPLACE 'https://your-upload-link.com' WITH YOUR ACTUAL DIRECT UPLOAD LINK -->
                 <a href="https://form.jotform.com/262299221978066" id="uploadLinkBtn" target="_blank" class="upload-input-btn" onclick="markUploaded()">
                     📁 Tap here to upload picture...
+                </a>
             </div>
 
             <!-- TICKET LIVE PREVIEW CARD -->
@@ -297,8 +298,7 @@
         // Prevent immediate submission
         event.preventDefault();
 
-        const fileInput = document.getElementById('paymentProofFile');
-        if (!isProofUploaded && (!fileInput || !fileInput.files || fileInput.files.length === 0)) {
+        if (!isProofUploaded) {
             alert('Please upload your payment receipt or screenshot before submitting.');
             return;
         }
@@ -335,5 +335,4 @@
 </script>
 
 </body>
-  </html>
-  
+</html>
